@@ -14,7 +14,7 @@ contract NaughtsAndCrosses
     uint8 public currentPlayer;
     string[3][3] public board;
     // col0, col1, col2, row0, row1, row2, diag0, diag1
-    int8[8] public score;
+    int8[8] score;
     bool public gameInProgress;
     uint8 public winner;
     
@@ -34,7 +34,7 @@ contract NaughtsAndCrosses
     }
 
     function setScore() {
-        for (uint i = 0; i<=8; i++) {
+        for (uint i = 0; i<8; i++) {
             score[i] = 0;
         }
     }
@@ -91,7 +91,7 @@ contract NaughtsAndCrosses
     function checkWinner()
         private
     {
-        for (uint8 i = 0; i<=8; i++) {
+        for (uint8 i = 0; i<8; i++) {
             if (score[i] == 3) {
                 winner = 0;
                 gameInProgress = false;
