@@ -17,13 +17,16 @@ contract NaughtsAndCrosses
     int8[8] score;
     bool public gameInProgress;
     Player public winner;
+    uint256 public payout;
     
-    function NaughtsAndCrosses(address playerOneAdr, address playerTwoAdr) 
+    function NaughtsAndCrosses(address playerOneAdr, address playerTwoAdr)
+        payable
     {
         players[0] = Player("X", playerOneAdr, 1);
         players[1] = Player("O", playerTwoAdr, -1);
         currentPlayer = 0;
         gameInProgress = true;
+        payout = msg.value;
         
         board = [
             ["","",""], 
@@ -100,6 +103,7 @@ contract NaughtsAndCrosses
             if (score[i] == 3 || score[i] == -3) {
                 winner = players[currentPlayer];
                 gameInProgress = false;
+                winner.addr.transfer(payout);
             }
         }
     }
