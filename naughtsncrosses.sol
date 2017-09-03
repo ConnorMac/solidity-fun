@@ -21,7 +21,7 @@ contract NaughtsAndCrosses
     function NaughtsAndCrosses(address playerOneAdr, address playerTwoAdr) 
     {
         players[0] = Player("X", playerOneAdr, 1);
-        players[1] = Player("Y", playerTwoAdr, -1);
+        players[1] = Player("O", playerTwoAdr, -1);
         currentPlayer = 0;
         gameInProgress = true;
         
