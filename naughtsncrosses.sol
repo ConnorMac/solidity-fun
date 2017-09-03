@@ -16,7 +16,7 @@ contract NaughtsAndCrosses
     // col0, col1, col2, row0, row1, row2, diag0, diag1
     int8[8] score;
     bool public gameInProgress;
-    uint8 public winner;
+    Player public winner;
     
     function NaughtsAndCrosses(address playerOneAdr, address playerTwoAdr) 
     {
@@ -33,7 +33,7 @@ contract NaughtsAndCrosses
         setScore();
     }
 
-    function setScore() {
+    function setScore() private {
         for (uint i = 0; i<8; i++) {
             score[i] = 0;
         }
@@ -67,6 +67,11 @@ contract NaughtsAndCrosses
             board[coords[0]][coords[1]] = players[currentPlayer].char;
             updateScore(coords[0], coords[1]);
             checkWinner();
+            if (currentPlayer == 0) {
+                currentPlayer = 1;
+            } else {
+                currentPlayer = 0;
+            }
         } else {
             revert();
         }
@@ -92,12 +97,8 @@ contract NaughtsAndCrosses
         private
     {
         for (uint8 i = 0; i<8; i++) {
-            if (score[i] == 3) {
-                winner = 0;
-                gameInProgress = false;
-            }
-            if (score[i] == -3) {
-                winner = 1;
+            if (score[i] == 3 || score[i] == -3) {
+                winner = players[currentPlayer];
                 gameInProgress = false;
             }
         }
