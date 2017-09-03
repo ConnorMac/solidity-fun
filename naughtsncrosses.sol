@@ -10,7 +10,7 @@ contract NaughtsAndCrosses
         int8 increment;
     }
 
-    Player[2] players;
+    Player[2] public players;
     uint8 public currentPlayer;
     string[3][3] public board;
     // col0, col1, col2, row0, row1, row2, diag0, diag1
